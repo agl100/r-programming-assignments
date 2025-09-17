@@ -33,6 +33,4 @@ df_long <- rbind(
 ggplot(df_long, aes(x = Name, y = Value, fill = Poll)) +
   geom_col(position = "dodge") +
   labs(title = "Poll Results by Candidate",
-       x = "Candidate", y = "Value")
-
-# link to blog: https://rprogrammingfall25.blogspot.com/2025/09/module-3-assignment-data-structures-in-r.html 
+       x = "Candidate", y = "Value") 
