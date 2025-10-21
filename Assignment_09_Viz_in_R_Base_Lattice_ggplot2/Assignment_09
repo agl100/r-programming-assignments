@@ -1,0 +1,56 @@
+# Load Data
+data("CO2", package = "datasets")
+head(CO2)
+
+
+# 1. Basic R Graphics
+
+# Scatter Plot - Used In Blog
+plot(CO2$conc, CO2$uptake,
+     main = "Base: uptake vs conc",
+     xlab = "CO2 concentration (conc)",
+     ylab = "Uptake",
+     col = as.integer(CO2$Type))
+
+# Histogram
+hist(CO2$uptake,
+     main = "Base: Distribution of Uptake",
+     xlab = "Uptake Rate")
+
+
+# 2. Lattice Graphics
+
+library(lattice)
+
+# Conditional Scatter Plot - Used In Blog
+xyplot(uptake ~ conc | Type, 
+       data = CO2,
+       groups = Treatment, auto.key = TRUE,
+       main = "Lattice: Uptake vs CO2 by Type and Treatment")
+
+# Box-and-whisker Plot
+bwplot(uptake ~ Treatment, 
+       data = CO2,
+       main = "Lattice: Uptake by Treatment",
+       ylab = "Uptake Rate")
+
+
+# 3. ggplot2
+
+library(ggplot2)
+
+# Scatter Plot with Trend Line - Used In Blog
+ggplot(CO2, aes(x = conc, y = uptake, color = Type)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "ggplot2: Uptake vs CO2 Concentration by Type",
+       x = "CO2 Concentration", y = "Uptake Rate") +
+  theme_minimal()
+
+# Faceted Histogram
+ggplot(CO2, aes(x = uptake, fill = Treatment)) +
+  geom_histogram(binwidth = 2, color = "white") +
+  facet_wrap(~ Type) +
+  labs(title = "ggplot2: Uptake Distribution by Type and Treatment",
+       x = "Uptake Rate", y = "Count") +
+  theme_minimal()
