@@ -1,0 +1,46 @@
+# Original Bugged Code
+tukey_multiple <- function(x) {
+  outliers <- array(TRUE, dim = dim(x))
+  for (j in 1:ncol(x)) {
+    outliers[, j] <- outliers[, j] && tukey.outlier(x[, j])
+  }
+  outlier.vec <- vector("logical", length = nrow(x))
+  for (i in 1:nrow(x)) {
+    outlier.vec[i] <- all(outliers[i, ])
+  }
+  return(outlier.vec)
+}
+
+# Use Test Matrix to Find Bug
+set.seed(123)
+test_mat <- matrix(rnorm(50), nrow = 10)
+tukey_multiple(test_mat)
+
+
+# Fixing The Bug
+
+# Define 'tukey.outlier'
+tukey.outlier <- function(column) {
+  if (!is.numeric(x)) {
+    stop("tukey.outlier() requires a numeric vector.")
+  }
+  Q1 <- quantile(column, 0.25)
+  Q3 <- quantile(column, 0.75)
+  IQR <- Q3 - Q1
+  return(column < (Q1 - 1.5 * IQR) | column > (Q3 + 1.5 * IQR))
+}
+
+# Correct the Code
+corrected_tukey <- function(x) {
+  outliers <- array(TRUE, dim = dim(x))
+  for (j in seq_len(ncol(x))) {
+    outliers[, j] <- outliers[, j] & tukey.outlier(x[, j])
+  }
+  outlier.vec <- logical(nrow(x))
+  for (i in seq_len(nrow(x))) {
+    outlier.vec[i] <- all(outliers[i, ])
+  }
+  outlier.vec
+}
+
+corrected_tukey(test_mat)
