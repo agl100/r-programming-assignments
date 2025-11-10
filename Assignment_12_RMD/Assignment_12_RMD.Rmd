@@ -1,0 +1,49 @@
+---
+title: "My R Markdown Primer"
+author: "Avery Lane"
+date: "2025-11-10"
+output: html_document
+---
+
+## R Markdown
+
+An R Markdown is a simple formatting syntax for documents such as HTML, PDF, and Word. It is helpful because it lets you mix narrative text, executable R code, and math in one file, then “knit” it into a shareable document. It supports reproducible analysis because the output is generated directly from the source code and data.
+
+## Markdown Text - Narrative Paragraph
+
+R Markdown is one of my favorite tools to use because it keeps everything in one organized place. I like how it lets me combine text, code, and visuals without having to switch between multiple programs. For this assignment, I created a simple document that includes text, math, and code chunks using the ggplot2 package and the built-in mtcars dataset. The goal was to practice writing in Markdown format, run basic R code, and knit it into an HTML report.
+
+## LaTeX Equation
+
+$m = \frac{y_2 - y_1}{x_2 - x_1$
+
+
+$$
+m = \frac{y_2 - y_1}{x_2 - x_1}
+$$
+
+## Code Chunk 1: Load Library/Dataset
+
+```{r setup}
+
+# Load Library
+library(ggplot2)
+
+# Call Data
+data(mtcars)
+
+```
+
+## Code Chunk 2: Run Analysis or Generate Plot
+
+```{r cars}
+
+# Plot Data
+ggplot(mtcars, aes(x = hp, y = mpg)) +
+  geom_point()
+
+```
+
+## Reflection
+
+I actually enjoy working in R Markdown and use it pretty regularly for another class, so this assignment felt natural to me. I think it’s a super helpful tool because it keeps my work neat and organized while letting me explain my thought process right next to the code. I also like how easy it is to knit a clean, professional-looking report that includes both explanations and results. It makes it much easier to focus on the analysis instead of formatting.
